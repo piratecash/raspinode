@@ -15,7 +15,7 @@ dpkg-reconfigure --frontend=noninteractive locales
 update-locale LANG=$LANG
 
 echo -e "-----\nInstalling extra packages\n-----\n"
-DEBIAN_FRONTEND=noninteractive apt-get -yq install build-essential libtool libncurses5-dev autoconf automake redis-server php7.0-cli php7.0-curl php7.0-fpm php7.0-readline php7.0-json shellinabox nginx-light libboost-all-dev libqrencode-dev dh-autoreconf libminiupnpc-dev libgmp-dev python-requests libdb++-dev pwgen python-pip
+DEBIAN_FRONTEND=noninteractive apt-get -yq install build-essential libtool libncurses5-dev autoconf automake redis-server php7.0-cli php7.0-curl php7.0-fpm php7.0-readline php7.0-json shellinabox nginx-light libboost-all-dev libqrencode-dev dh-autoreconf libminiupnpc-dev libgmp-dev libevent-dev python-requests libdb++-dev pwgen python-pip
 
 echo -e "-----\nFIX ISSUE WITH SSL LIBRARY\n-----\n"
 apt-get -y remove libssl-dev
@@ -59,7 +59,7 @@ chown pirate:pirate /home/pirate/.piratecash/piratecash.conf
 echo -e "<?php\ndefined('BASEPATH') OR exit('No direct script access allowed');\n\$config['url'] = 'http://piraterpc:${GEN_PASS}@127.0.0.1:11888/';\n\$config['debug'] = FALSE;" > `pwd`/application/config/rpc.php
 
 echo -e "Installing piratecashd\n-----\n"
-wget https://github.com/piratecash/piratecash/releases/download/11.5.1/raspberry-piratecashd.tar.gz -O /tmp/raspberry-piratecashd.tar.gz
+wget https://github.com/piratecash/piratecash/releases/download/v11.5.7/raspberry-piratecashd.tar.gz -O /tmp/raspberry-piratecashd.tar.gz
 tar xf /tmp/raspberry-piratecashd.tar.gz -C /usr/local/bin/
 su - pirate -c "/usr/local/bin/piratecashd"
 sed -i -e "s/exit 0//g" /etc/rc.local

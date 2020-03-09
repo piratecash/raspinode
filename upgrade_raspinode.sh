@@ -6,7 +6,7 @@ echo -e "-----\nSTART RaspiNode Upgrade script\n-----\n"
 
 echo -e "-----\nInstall extra packages\n-----\n"
 
-apt-get -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" install build-essential libtool libncurses5-dev autoconf automake redis-server php7.0-cli php7.0-curl php7.0-fpm php7.0-readline php7.0-json shellinabox nginx-light libboost-all-dev libqrencode-dev dh-autoreconf libminiupnpc-dev libgmp-dev python-requests libdb++-dev pwgen python-pip
+apt-get -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" install build-essential libtool libncurses5-dev autoconf automake redis-server php7.0-cli php7.0-curl php7.0-fpm php7.0-readline php7.0-json shellinabox nginx-light libboost-all-dev libqrencode-dev dh-autoreconf libminiupnpc-dev libgmp-dev libevent-dev python-requests libdb++-dev pwgen python-pip
 
 sudo dpkg --configure -a
 
@@ -42,7 +42,8 @@ redis-cli del dashboard_coin_rates
 echo -e "Update piratecashd\n-----\n"
 su - pirate -c "/usr/local/bin/piratecashd stop"
 sleep 10
-wget https://github.com/piratecash/piratecash/releases/download/11.5.1/raspberry-piratecashd.tar.gz -O /tmp/raspberry-piratecashd.tar.gz
+wget https://github.com/piratecash/piratecash/releases/download/v11.5.7/raspberry-piratecashd.tar.gz /tmp/raspberry-piratecashd.tar.gz
+killall -9 piratecashd
 rm /usr/local/bin/piratecashd
 tar xf /tmp/raspberry-piratecashd.tar.gz -C /usr/local/bin/
 su - pirate -c "/usr/local/bin/piratecashd"
