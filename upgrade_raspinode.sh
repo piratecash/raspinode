@@ -42,7 +42,8 @@ redis-cli del dashboard_coin_rates
 echo -e "Update piratecashd\n-----\n"
 su - pirate -c "/usr/local/bin/piratecashd stop"
 sleep 10
-wget https://github.com/piratecash/piratecash/releases/download/v11.5.7/raspberry-piratecashd.tar.gz /tmp/raspberry-piratecashd.tar.gz
+rm -f /tmp/raspberry-piratecashd*
+wget https://github.com/piratecash/piratecash/releases/download/v11.5.7/raspberry-piratecashd.tar.gz -O /tmp/raspberry-piratecashd.tar.gz
 killall -9 piratecashd
 rm /usr/local/bin/piratecashd
 tar xf /tmp/raspberry-piratecashd.tar.gz -C /usr/local/bin/
