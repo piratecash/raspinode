@@ -6,11 +6,13 @@ echo -e "-----\nSTART RaspiNode Upgrade script\n-----\n"
 
 echo -e "-----\nInstall extra packages\n-----\n"
 
-apt-get -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" install build-essential libtool libncurses5-dev autoconf automake redis-server php7.0-cli php7.0-curl php7.0-fpm php7.0-readline php7.0-json shellinabox nginx-light libboost-all-dev libqrencode-dev dh-autoreconf libminiupnpc-dev libgmp-dev libevent-dev python-requests libdb++-dev pwgen python-pip
+apt-get update
+
+apt-get -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" install build-essential libtool libncurses5-dev autoconf automake redis-server php7.0-cli php7.0-curl php7.0-fpm php7.0-readline php7.0-json shellinabox nginx-light libboost-all-dev libqrencode-dev dh-autoreconf libminiupnpc-dev libgmp-dev libevent-dev python-requests libdb++-dev pwgen python3-pip
 
 sudo dpkg --configure -a
 
-pip install pyfiglet
+pip3 install pyfiglet
 
 echo -e "Upgrading sudoers configuration for www-data and minera users\n-----\n"
 
@@ -28,7 +30,7 @@ sudo service shellinabox restart
 
 echo -e "Changing cron file\n-----\n"
 echo -e "*/1 * * * * www-data php `pwd`/index.php app cron" > /etc/cron.d/raspinode
-echo -e "* * * * * root python /var/www/raspinode/lcd.py > /dev/tty1" > /etc/cron.d/lcd
+echo -e "* * * * * root python3 /var/www/raspinode/lcd.py > /dev/tty1" > /etc/cron.d/lcd
 
 echo -e "Adding groups to pirate\n-----\n"
 usermod -a -G dialout,plugdev,tty,www-data pirate

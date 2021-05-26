@@ -15,7 +15,7 @@ dpkg-reconfigure --frontend=noninteractive locales
 update-locale LANG=$LANG
 
 echo -e "-----\nInstalling extra packages\n-----\n"
-DEBIAN_FRONTEND=noninteractive apt-get -yq install build-essential libtool libncurses5-dev autoconf automake redis-server php7.0-cli php7.0-curl php7.0-fpm php7.0-readline php7.0-json shellinabox nginx-light libboost-all-dev libqrencode-dev dh-autoreconf libminiupnpc-dev libgmp-dev libevent-dev python-requests libdb++-dev pwgen python-pip
+DEBIAN_FRONTEND=noninteractive apt-get -yq install build-essential libtool libncurses5-dev autoconf automake redis-server php7.0-cli php7.0-curl php7.0-fpm php7.0-readline php7.0-json shellinabox nginx-light libboost-all-dev libqrencode-dev dh-autoreconf libminiupnpc-dev libgmp-dev libevent-dev python-requests libdb++-dev pwgen python3-pip
 
 echo -e "-----\nFIX ISSUE WITH SSL LIBRARY\n-----\n"
 apt-get -y remove libssl-dev
@@ -26,7 +26,7 @@ apt-mark hold libssl-dev
 sed -i -e "s/jessie/stretch/" /etc/apt/sources.list
 apt-get update
 
-pip install pyfiglet
+pip3 install pyfiglet
 
 echo -e "Adding pirate user\n-----\n"
 adduser pirate --gecos "" --disabled-password
@@ -71,7 +71,7 @@ redis-cli save
 
 echo -e "Adding cron file in /etc/cron.d\n-----\n"
 echo -e "*/1 * * * * www-data php `pwd`/index.php app cron" > /etc/cron.d/raspinode
-echo -e "* * * * * root python /var/www/raspinode/lcd.py > /dev/tty1" > /etc/cron.d/lcd
+echo -e "* * * * * root python3 /var/www/raspinode/lcd.py > /dev/tty1" > /etc/cron.d/lcd
 
 echo -e "Configuring shellinabox\n-----\n"
 cp conf/shellinabox /etc/default/
