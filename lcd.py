@@ -10,7 +10,6 @@ from pyfiglet import Figlet
 try:
     request = 'http://127.0.0.1/raspinode/index.php/app/lcd'
     response = requests.get(request)
-    print(str(response.content))
     if response.status_code == 200:
         lcd = json.loads(response.content.decode('utf-8'))
         if not lcd['error']:
