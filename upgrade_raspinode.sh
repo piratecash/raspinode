@@ -7,6 +7,7 @@ echo -e "-----\nSTART RaspiNode Upgrade script\n-----\n"
 echo -e "-----\nInstall extra packages\n-----\n"
 
 apt-get update
+apt -y upgrade
 
 apt-get -yq -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" install build-essential libtool libncurses5-dev autoconf automake redis-server php7.0-cli php7.0-curl php7.0-fpm php7.0-readline php7.0-json shellinabox nginx-light libboost-all-dev libqrencode-dev dh-autoreconf libminiupnpc-dev libgmp-dev libevent-dev python-requests libdb++-dev pwgen python3-pip
 
